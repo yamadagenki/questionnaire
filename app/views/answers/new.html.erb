@@ -1,0 +1,32 @@
+<h1>
+  アンケートフォーム
+</h1>
+<%= form_for(@answer) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name, placeholder: '名前' %>
+  <%= f.fields_for :answer_items do |ai| %>
+    <h2><%= ai.object.question.title %></h2>
+    <%= ai.hidden_field :question_id, value: ai.object.question_id %>
+    <div>
+      <%= ai.radio_button :rate, 1, checked: "checked" %>
+      <%= ai.label :当てはまる %>
+    </div>
+    <div>
+      <%= ai.radio_button :rate, 2 %>
+      <%= ai.label :だいたい当てはまる %>
+    </div>
+    <div>
+      <%= ai.radio_button :rate, 3 %>
+      <%= ai.label :どちらとも言えない %>
+    </div>
+    <div>
+      <%= ai.radio_button :rate, 4 %>
+      <%= ai.label :だいたい当てはまらない %>
+    </div>
+    <div>
+      <%= ai.radio_button :rate, 5 %>
+      <%= ai.label :当てはまらない %>
+    </div>
+  <% end %>
+  <%= f.submit '送信' %>
+<% end %>
